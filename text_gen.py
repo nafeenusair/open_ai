@@ -7,8 +7,14 @@ class TextGenerator:
         model="gpt-5-nano",
         reasoning= {"effort": "low"},
         input=[
-            {"role": "developer", "content": "You are a helpful coding assistant."},
-            {"role": "user", "content": prompt}
+            {
+                "role": "developer",
+                "content": "You are a helpful coding assistant."
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
         ]
     )
 
