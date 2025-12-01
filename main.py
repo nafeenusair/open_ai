@@ -10,6 +10,7 @@ while True:
     print("\n--- AI Assistant ---")
     print("1. Generate Text")
     print("2. Generate Image")
+    print("3. Image to Text")
     print("0. Exit")
 
     choice = input("Enter your choice: ")   
@@ -35,6 +36,15 @@ while True:
             print(f"Image generated and saved as {image_title}")
         except Exception as e:
             print("Error during image generation:", e)
+
+    elif choice == '3':
+        img_url = input("Enter image URL: ")
+        question = input("Enter your question about the image: ")
+
+        try:
+            image_vision.img_to_txt(img_url, question)
+        except Exception as e:
+            print("Error during image to text conversion:", e)
 
     elif choice == '0':
         print("Exiting the program.")

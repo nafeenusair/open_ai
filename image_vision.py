@@ -13,6 +13,7 @@ class ImageVision:
     def image_gen(self, prompt, title):
         response = self.client.client.responses.create(
             model="gpt-4.1-mini",
+            details="low",
             input=prompt,
             tools=[{"type": "image_generation"}]
         )
@@ -28,3 +29,26 @@ class ImageVision:
 
             with open(save_path, "wb") as f:
                 f.write(base64.b64decode(image_base64))
+
+    def img_to_txt(self, image_url, question):
+        response = self.client.client.responses.create(
+            model="gpt-4.1-mini",
+            details="low",
+            input=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": question
+                        },
+                        {
+                            "type": "input_image",
+                            "image_url": image_url
+                        }
+                    ]
+                }
+            ]
+        )
+
+        print(response.output_text)
