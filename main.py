@@ -1,16 +1,19 @@
 from openai_api import OpenAIAPI
 from text_gen import TextGenerator
 from image_vision import ImageVision
+from audio_speech import AudioSpeech
 
 client = OpenAIAPI()
 text_gen = TextGenerator(client)
 image_vision = ImageVision(client)
+audio_speech = AudioSpeech(client)
 
 while True:
     print("\n--- AI Assistant ---")
     print("1. Generate Text")
     print("2. Generate Image")
     print("3. Image to Text")
+    print("4. Audio Output")
     print("0. Exit")
 
     choice = input("Enter your choice: ")   
@@ -45,6 +48,16 @@ while True:
             image_vision.img_to_txt(img_url, question)
         except Exception as e:
             print("Error during image to text conversion:", e)
+
+    elif choice == '4':
+        ask = input("Enter your prompt for audio response: ")
+        file_name = input("Enter audio file name (with .wav): ")
+
+        try:
+            audio_speech.audio_output(ask, file_name)
+            print("Audio response generated and saved as response.wav")
+        except Exception as e:
+            print("Error during audio generation:", e)
 
     elif choice == '0':
         print("Exiting the program.")
